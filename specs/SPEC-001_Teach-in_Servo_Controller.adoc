@@ -1,0 +1,235 @@
+= SPEC-001: Teach-in Servo Controller (TiSCo)
+:sectnums:
+:toc:
+
+== Background
+
+The project involves a robotic control system called Teach-in Servo Controller (TiSCo) running on Arduino Mega 2560 and Adafruit Grand Central M4 Express (featuring the SAMD51 chip). It communicates bidirectionally with the outside world using serial packet data. The system includes multiple joints and servos, and it needs to be initialized, calibrated, and operated safely.
+
+== Introduction:
+// Provides a high-level overview of the project.
+
+=== Purpose
+// A brief description of the purpose of the project.
+// The goals and objectives of the project.
+
+The project offers a straightforward and consistent method for activating various complex mechanisms using hobby servos. A significant feature, often missing in most hobby robot control software, is the Teach-in functionality. This allows users to manually manipulate the robot joints in real time, recording the joint angles as the robot is guided through its movements. Once the input is processed, the robot can accurately replay the recorded motions at any desired speed. This capability enables the execution of extensive and complex motions without requiring advanced robotics theories such as Inverse Kinematics.
+
+=== Scope
+//  The scope of the project, including what will and will not be included.
+
+- The scope of the project includes the development of motion control algorithms, calibration settings, and input/output management.
+- Exclusions: The project does not cover the manufacturing of hardware components or the development of a user interface beyond basic command inputs.
+
+=== Definitions, Acronyms, and Abbreviations
+- **TISCO**: Teach-in Servo Controller
+
+- **Firmware**: The embedded code, running on the Arduino board
+
+- **COSMOS**: The OpenC3 software running on the pc, providing the user interfac.e
+tne
+
+- **PCA9685**: Pulse Width Modulation (PWM) controller used in the project
+(source: https://www.iso.org/sites/directives/current/part2/)
+
+- **Shall**: Requirement. Expression that conveys objectively verifiable criteria to be fulfilled and from which no deviation is permitted if conformance with the document is to be claimed.
+
+- **Should**: Recommendation. Expression that conveys a suggested possible choice or course of action deemed to be particularly suitable without necessarily mentioning or excluding others. In the negative form, a recommendation is the expression that a suggested possible choice or course of action is not preferred but it is not prohibited.
+
+- **May**: Permission. Expression that conveys consent or liberty (or opportunity) to do something.
+
+- **Can**: Possibility and Capability.
+    * Possibility: expression that conveys expected or conceivable material, physical or causal outcome.
+    * Capability: expression that conveys the ability, fitness, or quality necessary to do or achieve a specified thing.
+
+- **Must**: External constraint. Constraint or obligation on the user of the document (e.g. laws of nature or particular conditions existing in some countries or regions) that is not stated as a provision of the document. Note: Use of the word "must" does not imply that the external constraint referred to is a requirement of the document.
+
+=== References
+
+-   ISO/IEC/IEEE 29148:2018
+    This standard provides guidelines for requirements engineering in software and systems engineering. It outlines the processes for developing and managing requirements.
+
+-   ISO/IEC Directives, Part 2 — Principles and rules for the structure and drafting of ISO and IEC documents
+    https://www.iso.org/sites/directives/current/part2/index.xhtml
+
+-   ISO/IEC Guide 2:2004 - Standardization and related activities — General vocabulary
+    https://www.iso.org/standard/39976.html
+
+-   https://www.iso.org/directives-and-policies.html
+
+-   Definitions for other system and software engineering terms typically can be found in ISO/IEC/
+    IEEE 24765, available at https://www.computer.org/sevocab.
+
+-   Using the Correct Requirements Terms – Shall, Will, Should
+    https://argondigital.com/blog/product-management/using-the-correct-terms-shall-will-should/
+
+- PCA9685 datasheet
+- Motion control algorithm research papers
+- openc3
+
+== User Specifications
+
+=== User Stories
+- As a technician, I want to calibrate the robot’s joints so that it can perform accurate movements.
+
+- As an operator, I want to send commands to the robot and receive status messages to ensure it’s performing tasks correctly.
+
+=== Functional Requirements
+// Detailed list of functional requirements using the MoSCoW prioritization (Must, Should, Could, Won't).
+
+// === Functional Requirements
+// - will support Three modes of robot motion:
+//   - directly mirroring joystick input (normal joystick or custom made using
+//     low cost potentiometers,
+//   - replaying an earlier recorded motion back from memory,
+//   - executing a stream of COSMOS commands, setting the desired joint
+//     angles.
+// - Should support calibration settings for different robot joints.
+// - Could include logging of robot commands and movements.
+// - Won't focus on advanced user interface development in this phase.
+=== Must-Have
+
+1. Initialization of joints, servos, digital inputs and digital outputs.
+2. Calibration procedures for joints and servos.
+3. Safe startup and shutdown procedures.
+4. Communication via serial data packets.
+5. Real-time control of joints and servos.
+6. Error handling and halting procedures in case of failures.
+7. System states management (e.g., STARTUP, SHUTDOWN, SELFTEST).
+8. Integration of joystick inputs for joint control.
+9. Logging and debugging support through serial messages.
+
+=== Should-Have
+
+1. Logging and debugging support through serial messages.
+2. Reconfiguration capabilities for robot parameters.
+3. Support for external acquisition switches.
+4. Additional digital inputs and outputs for robot control.
+
+=== Could-Have
+
+1. Additional input methods for controlling servos.
+2. Advanced movement patterns for servos.
+
+=== Won't-Have
+
+1. Support for non-serial communication methods.
+
+=== Non-functional Requirements
+// Performance, usability, reliability, security, and other non-functional requirements.
+
+- Usability: The system should be easy to calibrate and configure.
+- Reliability: The system should operate continuously without failure for at least 24 hours.
+- Code: All code must comply with good embedded coding practices and be very clear to understand.
+
+== System Overview
+
+=== System Context
+// An overview of the system and its context within the organization or environment.
+
+- The system operates in a public space and interacts with a technician or operator who sends commands and calibrates the system.
+
+== Functional Specifications
+
+=== System Features
+// Detailed description of each system feature, aligned with user requirements.
+- Calibration and settings management for robot joints.
+- Command input processing and motion execution.
+- Status messaging and logging.
+
+=== Use Cases
+// Detailed use cases including actors, preconditions, postconditions, normal flow, and alternative flows.
+- **Use Case 1: Calibrate Joint**
+  - Actors: Technician
+  - Preconditions: System is powered on, and calibration tools are available.
+  - Postconditions: Joint calibration is stored in the system.
+  - Normal Flow: Technician selects joint -> Technician adjusts settings -> System saves settings.
+  - Alternative Flows: Calibration fails due to hardware issue -> Technician retries calibration.
+
+== Data Requirements
+
+=== Data Model
+// Entity-Relationship Diagram (ERD) or equivalent to represent data models.
+
+- The system uses a set of configuration files and runtime data structures to manage calibration settings and command inputs.
+
+=== Data Dictionary
+// Definitions of data elements and their attributes.
+
+- **calibration_settings**: Stores the calibration data for each joint.
+  - Attributes: joint_id, min_position, max_position, calibration_date.
+- **commands**: Stores the commands received by the system.
+  - Attributes: command_id, command_type, timestamp, status.
+
+== Interface Requirements
+
+=== User Interfaces
+// Description of the user interface elements and interactions.
+
+- Basic command line interface for sending commands and receiving status messages.
+
+=== External Interfaces
+// Description of any external interfaces, including APIs, data import/export, etc.
+
+- PWM controller interface (PCA9685) for controlling the robot's motors.
+- Input/output interfaces for sensors and actuators.
+
+== System Architecture
+
+=== Overview
+
+TiSCo has several components:
+1.  A pc running OpenC3 COSMOS that act as the main user interface. COSMOS sends commands, receives telemetry and stores data.
+2.  The TiSCo firmware.
+3.  An Arduino board with periferals running the TiSCo firmware.
+4.  A set of modified hobby servos that form a robot.
+5.  An input system for directly controlling the robot.
+- The system consists of several modules: calibration, command processing, motion control, and messaging.
+
+=== Detailed Design
+// Detailed design of system components, including any third-party integrations.
+
+- The calibration module manages joint settings.
+- The command processing module interprets user inputs.
+- The motion control module executes movements.
+- The messaging module handles status updates and logging.
+
+== Constraints and Assumptions
+
+=== Constraints
+// Any constraints that must be considered (e.g., technological, regulatory).
+
+- The system must operate within a controlled environment with limited external interference.
+- Hardware components are assumed to be functioning correctly and within specified tolerances.
+
+=== Assumptions
+// Assumptions made during the requirements gathering process.
+
+- The operator has basic technical knowledge of robotic systems.
+- The environment provides necessary power and network connectivity.
+
+== Glossary
+// A glossary of terms used in the document.
+- **Servo Calibration**: The process of adjusting the
+
+- **Joint calibration**: The process of further narrowing down calibrated servos that are mounted inside a robot joint to ensure accurate movemennt, staying within the physical upper and lower limits of the robots joints.
+
+- **Command**: An instruction sent from OpenC3 Cosmos software to the robot to perform a specific action.
+
+- **Telemetry**: Data sent in serial packetsfrom the robot to the OpenC3 COSMOS software containing a wide range of values
+
+- **Robot**: a set of joints, with additional digital inputs and outputs.
+
+- **Joint**: A movable part of the robot that can be adjusted or controlled. in software, A joint is a combination of a servo PWM output, a servo angle input, and a joystick input.
+
+== Appendices
+// Any additional information that supports the user specification document.
+
+- Additional information about the PCA9685 controller and its integration.
+
+== Sign-off
+// Sections for signatures from stakeholders to indicate their agreement with the specifications.
+- Stakeholder Signatures:
+  - Technician: ______________________
+  - Project Manager: ______________________
+  - Quality Assurance: ______________________

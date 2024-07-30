@@ -1,0 +1,87 @@
+/** @page DOXY_GENERALTODOS General Todos
+    - Write a short "How to get robot moving" guide.
+    - COSMOS
+        - Create screen for easy motion control, recording, and other tasks
+        - Support specifying multiple motions, and support stopping playing current motion
+        - Check different ways of specifying data in the TLM frames,
+          TELEMETRY TISCO SERVOPOTMAPPED_TLM <-> TELEMETRY TISCO SERVOPULSE_TLM
+          in C:\COSMOS\TiSCo\config\targets\TISCO\cmd_tlm\tlm.txt
+        - Write a quick file structure overview for openC3 files, with reference
+          to the OpenC3 website.
+
+    - Arduino
+        - Oscilloscope: measure the delay between successive calls to pwm_pulse_set,
+          (NUMBER_OF_JOINTS calls)
+          to determine the offset while creating the motion data
+          with the R scripts
+        - Add support for current sensing and limiting
+        - Add support for naming servos and analog inputs sensibly
+        - Fix terse naming of methods and function arguments: lookup on the internet
+          what good practices are.
+        - Support storing different motions in same or different Header file,
+          acessible using COSMOS commands
+        - In SplineFitServoData.R: expose all settings variables to outside configuration file
+        - Make sure that with all buffer and string initializations, the size
+          the size is of type size_t.
+        - implement (if possible) bitfield usages with struct
+          @see https://www.embedded.com/structures-and-classes-in-c/
+        - check if using method destructors are needed for good code cleanup
+        - @bug BUG_TLM_AT_MAX_SPEED_AFTER_CLEAN_START After clean boot, when fetching TLM using speed=0 (auto),
+         the timer interrupts are not used and tlm is sent at maximum speed
+         (every loop iteration)
+
+    - (from Google Keep)
+        - check hoe de full 4096 bit range van de pwm driver toch nuttig kan
+          gebruikt worden middels een frequentiedeler. voordeel is dat geen
+          extreme overshoot va' servo mogelijk is
+        - Een stresstest ontwerpen voor het belasten van de servos tegen de
+          toelaatbare grens.
+        - meerdere dataframe terugsturen met low priority status
+          (enkel op statusaanvraag) zoals huidige modus (sleep, autnonmous,
+          stepping, calibration, error, ...), naam, ...
+        - opstarten met servo-veiligheidslimieten die net in het midden liggen
+          of waarbij de hoge limiet lager ligt dan de lage. Dit heeft als
+          neveneffect dat de robot niet kan bewegen zolan de veiligheidslimieten
+          niet deftig gezet zijn. Dit laat ook toe om min of meer veilig op
+          te starten met de servo 'powered' , totdat ze kunnen unpowered worden.
+        - De setpwm overschrijven/vervangen met de veiligheidslimieten
+          die altijd actief moeten gechecked worden.
+        - calibratie van de servopot vs. de joystickpot
+        - Checken onboard spanningen: Arduino 5v, servospanning, aangepaste
+          ADC spanning (eventueel)
+        - Checken motor aansluitingen: ruststromen van elke servos
+        - Checken van huidige servopositie. Bij stilstand moet dit altijd
+          overeenkomen met joystickstand
+        - Checken calibratie servos, opladen uiterste grenzen
+        - Checken van input controller joystick, poten:
+            - aangesloten?
+            - al of niet calibratie nodig?
+        - Bij connectieproblemen: veilig shutdown in compacte start positie,
+          max één sec. Dan sleep mode
+        - Timeouts: shutdown robot bij connectieproblemen
+        - Stroommeting: Sleep mode bij teveel en/of te lang hoge stroom trekken
+        - Veilige stopmodus: robot compact maken, sleep
+        - Reset/reboot commando arduino
+        - Modus voor recording van de beweging van één poot
+        - Mode: één of vier poten parallel bewegen volgens input van 3axis
+          joystick, volgens input van pootmockup
+        - Mode: één of vier poten bewegen naar de positie volgens de inhoud van
+          een command structure.
+        - Mode: één of meerdere poten bewegen volgens een in Arduino ingebouwde
+          dataset met posities
+        - Mode: Zelfde, maar dan volgens resultaat van wiskundige formule
+        - Feedback: alle spanningen, alle stromen of stroomgemiddelden
+        - Mogelijkheid hernoemen servos naar ledemaatnamen
+        - Command structure met de timeouts, max stroomwaarden
+        - Self-test met eenvoudige servobewegingen: bewegen naar een standaard tussenpositie.
+          Zet robot schuin en test een poot: 90° servouitslag en dan max servouitslag (180°)
+          zou mechanische stops moeten bereiken.
+        - Single Shot acquisition aanpassen of uitbreiden zodat steeds een aantal
+          acquisitions (getimed met de timer interrupt) gedaan wordt zolang de
+          acquisition knop ingedrukt blijft.
+        - verwijderen van alle loop-based acquisition code en overschakelen
+          op timer interrupt code, voor het eenvoudiger maken van de codebase.
+        - Organize COSMOS and the codebase so that in the future an easy transition
+  to wireless TCP/IP communication can be established.
+
+ */

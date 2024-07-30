@@ -1,0 +1,112 @@
+= User Specification Document: <Project Name>
+:sectnums:
+:toc:
+
+== Introduction:
+// Provides a high-level overview of the project.
+=== Purpose
+// A brief description of the purpose of the project.
+// The goals and objectives of the project.
+
+=== Scope
+//  The scope of the project, including what will and will not be included.
+
+=== Definitions, Acronyms, and Abbreviations
+//  Definitions of terms, acronyms, and abbreviations used in the document.
+(source: https://www.iso.org/sites/directives/current/part2/)
+- **Shall**: Requirement. Expression that conveys objectively verifiable criteria to be fulfilled and from which no deviation is permitted if conformance with the document is to be claimed.
+
+- **Should**: Recommendation. Expression that conveys a suggested possible choice or course of action deemed to be particularly suitable without necessarily mentioning or excluding others. In the negative form, a recommendation is the expression that a suggested possible choice or course of action is not preferred but it is not prohibited.
+
+- **May**: Permission. Expression that conveys consent or liberty (or opportunity) to do something.
+
+- **Can**: Possibility and Capability.
+
+    * Possibility: expression that conveys expected or conceivable material, physical or causal outcome.
+    * Capability: expression that conveys the ability, fitness, or quality necessary to do or achieve a specified thing.
+
+- **Must**: External constraint. Constraint or obligation on the user of the document (e.g. laws of nature or particular conditions existing in some countries or regions) that is not stated as a provision of the document. Note: Use of the word "must" does not imply that the external constraint referred to is a requirement of the document.
+
+=== References
+
+-   ISO/IEC/IEEE 29148:2018
+    This standard provides guidelines for requirements engineering in software and systems engineering. It outlines the processes for developing and managing requirements.
+-   ISO/IEC Directives, Part 2 — Principles and rules for the structure and drafting of ISO and IEC documents
+    https://www.iso.org/sites/directives/current/part2/index.xhtml
+-   ISO/IEC Guide 2:2004 - Standardization and related activities — General vocabulary
+    https://www.iso.org/standard/39976.html
+-   https://www.iso.org/directives-and-policies.html
+-   Definitions for other system and software engineering terms typically can be found in ISO/IEC/
+    IEEE 24765, available at https://www.computer.org/sevocab.
+-   Using the Correct Requirements Terms – Shall, Will, Should
+    https://argondigital.com/blog/product-management/using-the-correct-terms-shall-will-should/
+
+=== User Stories
+// Detailed user stories that describe the end-user’s needs and how they will interact with the system.
+
+=== Functional Requirements
+// Detailed list of functional requirements using the MoSCoW prioritization (Must, Should, Could, Won't).
+
+=== Non-functional Requirements
+// Performance, usability, reliability, security, and other non-functional requirements.
+
+== System Overview
+
+=== System Context
+// An overview of the system and its context within the organization or environment.
+
+=== Use Case Diagram
+// A visual representation of the main use cases.
+
+== Functional Specifications
+
+=== System Features
+// Detailed description of each system feature, aligned with user requirements.
+
+=== Use Cases
+// Detailed use cases including actors, preconditions, postconditions, normal flow, and alternative flows.
+
+== Data Requirements
+
+=== Data Model
+// Entity-Relationship Diagram (ERD) or equivalent to represent data models.
+
+=== Data Dictionary
+// Definitions of data elements and their attributes.
+
+== Interface Requirements
+
+// Wireframes or mockups of user interfaces.
+
+=== User Interfaces
+// Description of the user interface elements and interactions.
+
+=== External Interfaces
+// Description of any external interfaces, including APIs, data import/export, etc.
+
+== System Architecture
+
+=== Overview
+// High-level architecture diagram.
+
+
+=== Detailed Design
+// Detailed design of system components, including any third-party integrations.
+
+== Constraints and Assumptions
+
+=== Constraints
+// Any constraints that must be considered (e.g., technological, regulatory).
+
+
+=== Assumptions
+// Assumptions made during the requirements gathering process.
+
+== Glossary
+// A glossary of terms used in the document.
+
+== Appendices
+// Any additional information that supports the user specification document.
+
+== Sign-off
+// Sections for signatures from stakeholders to indicate their agreement with the specifications.

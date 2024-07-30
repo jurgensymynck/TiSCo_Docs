@@ -1,0 +1,20 @@
+/**
+@page DOXY_ABOUT_ME About me
+@image html
+
+
+
+@subsection DOXY_MYSTUDYMATERIAL My study material
+
+**Study Material**
+
+Here is a list of the key study materials I used for this project.
+
+- *Embedded C Coding Standard* \cite Barr2018
+- *Linux kernel coding style* \cite LinuxKernelCodingStyle
+- *C Programming, 2nd ed.* \cite King2008
+- *C++ Primer, 5th ed.* \cite Lippman2012
+- *Design patterns* \cite Gamma1995
+- [*OpenC3 COSMOS*](https://docs.openc3.com/) website
+
+*/

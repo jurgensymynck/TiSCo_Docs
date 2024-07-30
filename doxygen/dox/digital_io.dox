@@ -1,0 +1,91 @@
+/**
+@page DOXY_DIGITAL_IO Digital Input & Output
+@version 8/8/2024
+
+<center>
+<img src="DigitalIO-1.png"
+alt="TiSCo Digital I/O connections schematic"
+height="360"/>
+</center>
+
+@section DOXY_DIGITAL_INPUTS Digital Inputs
+There are sixteen digital inputs arranged in one 16 bit word: port A
+(lower byte) and port C (upper byte). They are configured with the
+input pull-up resistors activated, pulling the rest state of the inputs to +5 V.
+As of 15/07/2022, only port A is
+connected to an angled header on the Arduino board (see picture).
+
+In COSMOS, the Digital Inputs can be read read with a
+CMD_FETCH_ROBOTDIGITALINPUTS command that returns a
+TLM_ROBOTDIGITALINPUTS telemetry packet.
+
+@subsection DOXY_INPUT_SWITCH Input Switches
+
+<center>
+<img src="InputSwitchDebounce_comp_SCALED.jpg"
+alt="Electric diagram of the UV-LED with resistor"
+height="240"/>
+</center>
+
+<center>
+<img src="Input_Switch_Debounce_Schematic.png"
+alt="Electric diagram of the Input Switch Debounce capacitor"
+height="240"/>
+</center>
+
+Current robot hardware implementation connects a Normally Open (NO) switch
+(see image) between the input pin and GND level. An activated input results in
+0 V on the pin (GND level). This voltage level is registered as
+a zero in the ports input registers (PINA and PINC).
+
+
+@todo clear up confusion between PINC and PORTC
+
+The Digital Input word is the @e logical interpretation of the actual
+PINA and PINC registers, which means:
+- zero, False: means NO input,
+- one, True  : means Input.
+
+The @e logical version of Digital Inputs is the inverse of the actual
+measured voltage levels on the pins, so long as the correct input switch wiring
+is observed.
+
+@section DOXY_DIGITAL_OUTPUTS Digital Outputs
+There are eight digital outputs; port L. As is standard with the Arduino,
+the rest state of an output pin is Low (0 V).
+
+The Digital Outputs can be set via a CMD_SET_ROBOTDIGITALOUTPUTS command.
+Reading back the actual output port register is done by sending a
+CMD_FETCH_ROBOTDIGITALOUTPUTS command that returns a TLM_ROBOTDIGITALOUTPUTS
+telemetry packet.
+
+Current robot hardware implementation connects a load (an UV-LED in this case)
+between the output pin and GND level. An activated output results in
++5 V on the pin, activating the load and activating the LED.
+
+@warning The maximum current limit for sinking (IOL) or sourcing (IOH) a load
+connected to a single pin is 20 mA! The sum of all IOL and IOH currents should
+not exceed 100 mA in most cases!
+
+@see [ATmega2560](https://www.microchip.com/en-us/product/atmega2560)
+datasheet; "31.1 DC Characteristics" for exact current limits.
+
+@subsection UVLED_SCHEM_5V Electric diagram of the UV-LED with resistor
+
+@warning This setup is designed for the 5 V logic of the Arduino MEGA 2560 and
+is not compatible with, and may potentially damage, the 3.3V-based
+Adafruit Grand Central M4 Express featuring the SAMD51.
+
+<center>
+<img src="UVLED_conn_schematic_5V_avr2560.jpg"
+alt="Electric diagram of the UV-LED with resistor"
+height="240"/>
+</center>
+
+The @e logical version of Digital Outputs is identical to the actual
+voltage levels that should be applied to the output pins, as long as the loads
+are 'sourced' (as opposed to 'sinking' the loads). This means:
+- write zero (False) to output pin: no load activated (LED off).
+- write one (True) to output pin:load is activated (LED on).
+
+*/

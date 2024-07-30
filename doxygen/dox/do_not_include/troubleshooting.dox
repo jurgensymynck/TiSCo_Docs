@@ -1,0 +1,101 @@
+/**
+
+@page DOXY_TROUBLESHOOTING Troubleshooting
+
+
+@section DOXY_JOINTPWMPULSE_and_JOINTANGLE_MAPPED_DONT_LINE_UP JOINTPWMPULSE and JOINTANGLE_MAPPED don't line up
+
+Causes:
+- Some joints exhibit some minor or major play due to wear and tear. This can
+result in the ``JOINTANGLE_RAW`` value to vary up to 10 units.
+Test this by powering the servo, step to the joint lower or upper limit,
+and manually reverse the load direction by pushing in the opposite direction
+of gravity for instance.
+Observe ``JOINTANGLE_RAW``, it will change a few units.
+Since JOINTANGLE_MAPPED_TO_PWMPULSE is derived from JOINTANGLE_RAW,
+it is also affected.
+
+Solution:
+Try to guess the intermediate value of ``JOINTANGLE_RAW`` *between* the
+two opposing load conditions and use that value for the joint angle limits.
+Update the value in  ``g_joint_preset[]`` and update the ``limits``
+in the telemetry definition of ``TLM_JOINTANGLE_RAW``.
+
+<!--
+Causes:
+- After changing lower and uper limits in ``calibration_and_settings.h``,
+  failure to proper set the  ``LIMITS`` in ``tlm.txt`` at *all* following
+  telemetry definitions:
+  -#  ``TLM_JOINTPWMPULSE``: these limits are prominent
+    in the 'calibrate' telemetry screen.
+  -#  ``TLM_JOINTANGLE_RAW``
+  -#  ``TLM_JOINTINPUT_RAW`` -->
+
+
+Solutions:
+- After changing values in ``calibration_and_settings.h`` and uploading,
+  close the Telemetry Viewer, Reload Configuration, open telemetry viewer and
+  reopen the telemetry screen where changes should be visble.
+
+
+@section DOXY_JOINT_MOVES_ERRATICALLY The joint moves erratically
+
+Causes:
+- The TLM_AND_SAMPLE_RATE is set too low, like 3/s. This will only update the
+  servos three time per second.
+- There is a flood of debus messages on the serial message port, interfering with
+  the swift program execution
+
+Solutions:
+- Increase TLM_AND_SAMPLE_RATE to higher rates like 25/s.
+- Turn off certain message types with command ``CMD_SET_MESSAGE_MASK`` to
+  decrease serial message output.
+- Prevent some errors that cause flooding serial messages like:
+    -`` (!) pwm_pulse_set(0) NOK!``
+    -`` (!) input_angle_upper_limit = g_analog_in_abs_lower_limit!``
+
+
+@section DOXY_JOINT_CANNOT_REACH_HW_LIMIT The joint fails to reach its hardware limits
+
+Causes:
+- There are no servo software limits set or the controller firmware
+  doesn't enforce them.
+  Check the serial debug message log for errors that
+  indicate if a pulse command tries to move beyond servo software limits.
+  If an error is shown, the limits are active but probably too conservative or
+  plain wrong.
+- The joints servo is already pushing against its internal hardware limits.
+  Disconnect the power to the servo immediately, to protect the servo from
+  (further) internal damage!
+  See @ref DOXY_CALIB_SERVO_LIMITS.
+  Also, check that the controller firmware is enforcing the servo software limits.
+- The joint is poorly designed or broken. A joint should be desiged so that
+  the *absolute maximum* allowed servo sweep is lower or equal to 180°.
+  It is strongly recommended to implement a few degrees of leeway:
+  160° for example,which allows 10° of leeway in each sweep direction.
+  This guarantees that first the joint hardware limits are reached,
+  and failing that, the *servo* software limits, before reaching the servo
+  internal hardware limits.
+  respectively.
+- (todo: expand this) Robot is in calibration mode, servo software limits
+  are disable in the firmware AND servo internal hardware is reached.
+
+@section DOXY_JOINT_WONT_MOVE_WHILE_STEPPING The joint won't move while trying to step it.
+
+Causes:
+- The joint could be in an extreme state like hitting the joint hardware limits
+  while it is unpowered. After powering on, the joint is in an 'illegal'
+  position. When stepping a small step (like +1) from this illegal postion,
+  the new postion could also be illegal and the joint won't move.
+  Check the serial debug messages for errors.
+
+Solutions:
+- Power off the joint, move the joint by hand to the halfway position and
+  try again.
+
+  *or*
+
+- Using commands, set the pulse value from COSMOS to a known safe value like
+the halfway point.
+
+*/
