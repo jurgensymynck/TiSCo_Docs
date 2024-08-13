@@ -1,6 +1,3 @@
-
-
-
 <!-- PROJECT LOGO -->
 <!--
 <br />
@@ -37,51 +34,26 @@
   </a>
 
 </p>
-<!-- TABLE OF CONTENTS -->
-<!-- vscode-markdown-toc -->
-* 1. [About the project](#Abouttheproject)
-	* 1.1. [Programming a Robot by Teaching it](#ProgrammingaRobotbyTeachingit)
-	* 1.2. [Why this project?](#Whythisproject)
-	* 1.3. [Key features](#Keyfeatures)
-* 2. [Hardware](#Hardware)
-* 3. [OpenC3 COSMOS Control Software](#OpenC3COSMOSControlSoftware)
-* 4. ['Proof of Concept' Development Prototype](#ProofofConceptDevelopmentPrototype)
-* 5. [Detailed Documentation and More Info](#DetailedDocumentationandMoreInfo)
-* 6. [What the Project Doesn't Do](#WhattheProjectDoesntDo)
-* 7. [Roadmap](#Roadmap)
-* 8. [Contributing](#Contributing)
-	* 8.1. [Prioritized todos](#Prioritizedtodos)
-		* 8.1.1. [Coding style](#Codingstyle)
-		* 8.1.2. [Feature requests](#Featurerequests)
-* 9. [License](#License)
-* 10. [About me](#Aboutme)
-
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --><div id="top"></div>
-<!-- Source: Best-README-Template -->
 
 <!-- ABOUT THE PROJECT -->
-##  1. <a name='Abouttheproject'></a>About the project
+## <a name='Abouttheproject'></a>About the project
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
 
 The project offers an easy and consistent method to control mechanisms involving 16 hobby servos.
 
-###  1.1. <a name='ProgrammingaRobotbyTeachingit'></a>Programming a Robot by Teaching it
+### <a name='ProgrammingaRobotbyTeachingit'></a>Programming a Robot by Teaching it
 
 The project provides an easy and reliable way to activate various complex mechanisms using hobby servos. A key feature, often missing in most hobby robot control software, is the Teach-in functionality. This allows users to manually move the robot joints in real time, recording the joint angles as the robot is guided through its movements. After [processing the input](#curve-fitting), the robot can accurately replay the recorded motions at any desired speed. This feature enables the execution of extensive and complex movements without needing advanced robotics theories like [Inverse Kinematics](https://en.wikipedia.org/wiki/Inverse_kinematics).
 
-###  1.2. <a name='Whythisproject'></a>Why this project?
+###  <a name='Whythisproject'></a>Why this project?
 
 The project empowers hands-on builders to bring their ideas to life, allowing them to focus on the mechanical aspects of their designs, such as material selection, mechanical strength, stiffness-to-weight ratio, mass/weight, durability, manufacturability, sustainability, and cost.
 
 Once the mechanical design is validated, the mechanism can be given to software and microcontroller enthusiasts to develop the necessary robotics control firmware.
 
-###  1.3. <a name='Keyfeatures'></a>Key features
+### <a name='Keyfeatures'></a>Key features
 
 * Based on a standard Arduino Mega 2560 with extra breakout
   boards, and standard hobby servos with small modification.
@@ -104,7 +76,7 @@ mechanical side of the robots, see the
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-##  2. <a name='Hardware'></a>Hardware
+## <a name='Hardware'></a>Hardware
 
 <p align="center">
 <img src="gfx/TiSCo_Brains1_SCALED.jpg"
@@ -144,7 +116,7 @@ low cost potentiometers as well as the servos internal shaft angle.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-##  3. <a name='OpenC3COSMOSControlSoftware'></a>OpenC3 COSMOS Control Software
+## <a name='OpenC3COSMOSControlSoftware'></a>OpenC3 COSMOS Control Software
 
 <p align="center">
 <img src="gfx/openc3-cosmos-tisco-screens.png"
@@ -182,7 +154,7 @@ contains the motion data, ready to be (re)compiled in the firmware.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-##  4. <a name='ProofofConceptDevelopmentPrototype'></a>'Proof of Concept' Development Prototype
+## <a name='ProofofConceptDevelopmentPrototype'></a>'Proof of Concept' Development Prototype
 
 <p align="center">
 
@@ -207,13 +179,13 @@ Using the *Teach-In* functionality, setting *any* mechanical construction in mot
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-##  5. <a name='DetailedDocumentationandMoreInfo'></a>Detailed Documentation and More Info
+## <a name='DetailedDocumentationandMoreInfo'></a>Detailed Documentation and More Info
 
 * Check out the [Doxygen documentation](https://jurgensymynck.github.io/TiSCo_Docs/doxygen) for all detailed documentation.
-* Check out the projects [User Specification Documents](https://jurgensymynck.github.io/TiSCo_Docs/specs) for how to use TiSCo (this is a work in progress).
+* Check out the projects [User Specification Documents](./specs/) for how to use TiSCo (this is a work in progress).
 * For the mechanical side of the robots, see the [AMROD project homepage](https://odisee.be/AMROD).
 
-##  6. <a name='WhattheProjectDoesntDo'></a>What the Project Doesn't Do
+## <a name='WhattheProjectDoesntDo'></a>What the Project Doesn't Do
 
 * The robots do not move autonomously by following high-level commands like "walk forward" or "grip object." Instead, they either mirror analog inputs in real time, replay previously recorded motions, or set the joints according to an incoming stream of COSMOS command packets.
 * There is no support for rotary motions like wheels, making [Turtle robots](https://en.wikipedia.org/wiki/Turtle_(robot)) or other mobile robots unfeasible at this time. If a reliable teach-in method for multiple rotations is developed, this feature might be included in the future.
@@ -235,7 +207,7 @@ Using the *Teach-In* functionality, setting *any* mechanical construction in mot
 
 
 <!-- ROADMAP -->
-##  7. <a name='Roadmap'></a>Roadmap
+## <a name='Roadmap'></a>Roadmap
 
 * [ ] Write detailed instructions on:
   * [ ] Calibration of input potentiometers and joysticks
@@ -258,13 +230,13 @@ Using the *Teach-In* functionality, setting *any* mechanical construction in mot
 
 
 <!-- CONTRIBUTING -->
-##  8. <a name='Contributing'></a>Contributing
+## <a name='Contributing'></a>Contributing
 
 Since this project will be featured in an educational setting, it is essential that it exemplifies good coding practices and the use of embedded Object-Oriented Programming in C++. Additionally, the coding style should closely align with established Arduino coding conventions.
 
-###  8.1. <a name='Prioritizedtodos'></a>Prioritized todos
+### <a name='Prioritizedtodos'></a>Prioritized todos
 
-####  8.1.1. <a name='Codingstyle'></a>Coding style
+#### <a name='Codingstyle'></a>Coding style
 
 Evaluate the code and suggest better (embedded) coding practices:
 
@@ -280,7 +252,7 @@ Evaluate the code and suggest better (embedded) coding practices:
 * If sensible, refactor large switch() statements using polymorphism,
   for readability.
 
-####  8.1.2. <a name='Featurerequests'></a>Feature requests
+#### <a name='Featurerequests'></a>Feature requests
 
 * Implementation of safe serial framed data communication, possibly
   using [COBS](https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing)
@@ -295,13 +267,13 @@ Evaluate the code and suggest better (embedded) coding practices:
 * Write test procedures for testing the code base and COSMOS communication.
 
 <!-- LICENSE -->
-##  9. <a name='License'></a>License
+## <a name='License'></a>License
 
 * The TiSCo source code that is hosted on https://github.com/jurgensymynck/TiSCo is distributed under the GPL-3.0 License.
-See [LICENSES](https://github.com/jurgensymynck/TiSCo/LICENSES) for more information.
+
 
 * The contents of [this documentation repo](https://github.com/jurgensymynck/TiSCo_Docs) is distributed under the MIT License.
-See [LICENSES](https://github.com/jurgensymynck/TiSCo_Docs/LICENSES) for more information.
+See [LICENSE](./LICENSE) for more information.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -325,7 +297,7 @@ Project Link: [https://github.com/jurgensymynck/TiSCo_PRIVATE](https://github.co
 <p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
-##  10. <a name='Aboutme'></a>About me
+## <a name='Aboutme'></a>About me
 
 I work at [Odisee University College](https://odisee.be) as a teacher and
 researcher in the Professional Bachelor program for
@@ -344,8 +316,7 @@ With the advent of powerful, easy to use and cheap controller boards like the
 Arduinos, and after noticing how quick and effortlessly students slapped an
 Arduino and motors to their 3D printed builds, I decided to reorient my courses.
 
-This project aims to help me (re)learn C and C++ in an embedded context and
-create impressive robots.
+This project aims to help me (re)learn C and C++ in an embedded context while building cool robots!
 
 
 <!-- If you want to help out, please fork the repo and create a pull request.
